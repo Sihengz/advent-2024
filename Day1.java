@@ -6,12 +6,12 @@ import java.util.Scanner;
 public class Day1 {
     public static void main(String[] args) {
 
-        ArrayList<String> fileData = getFileData("src/Day1Input.txt");
+        ArrayList<String> fileData = getFileData("Day1Input.txt");
         System.out.println(fileData);
-        ArrayList<Integer> listOne = new ArrayList<Integer>();
-        ArrayList<Integer> listTwo = new ArrayList<Integer>();
-        for (int i = 0; i < fileData.size(); i++) {
-            String[] ids = fileData.get(i).split(" ");
+        ArrayList<Integer> listOne = new ArrayList<>();
+        ArrayList<Integer> listTwo = new ArrayList<>();
+        for (String fileDatum : fileData) {
+            String[] ids = fileDatum.split(" ");
             int idOne = Integer.parseInt(ids[0]);
             int idTwo = Integer.parseInt(ids[3]);
             listOne.add(idOne);
@@ -19,22 +19,28 @@ public class Day1 {
         }
         listOne.sort(null);
         listTwo.sort(null);
+        int total = 0;
         while (!listOne.isEmpty()) {
-
+            int diff = listOne.getFirst() - listTwo.getFirst();
+            if (diff < 0) {
+                diff*=-1;
+            }
+            listOne.removeFirst();
+            listTwo.removeFirst();
+            total+=diff;
         }
+        System.out.println(total);
 
-        // you now have an ArrayList of Strings for each number in the file
-        // do Advent 2020 day 1!
     }
 
     public static ArrayList<String> getFileData(String fileName) {
-        ArrayList<String> fileData = new ArrayList<String>();
+        ArrayList<String> fileData = new ArrayList<>();
         try {
             File f = new File(fileName);
             Scanner s = new Scanner(f);
             while (s.hasNextLine()) {
                 String line = s.nextLine();
-                if (!line.equals(""))
+                if (!line.isEmpty())
                     fileData.add(line);
             }
             return fileData;
