@@ -8,6 +8,7 @@ public class Day3Part1 {
 
         ArrayList<String> fileData = getFileData("Day3Input.txt");
         System.out.println(fileData);
+        int total = 0;
         for (int i = 0; i < fileData.size(); i++) {
             String[] newString = fileData.get(i).split("mul\\(");
             for (int j = 0; j < newString.length; j++) {
@@ -15,18 +16,40 @@ public class Day3Part1 {
                 System.out.println(line);
                 char letter = line.charAt(0);
                 int count = 0;
-                while (Character.isDigit(letter) || letter == 44 || letter == 41) {
-                    if(letter == 41) {
-                        // if )
+                String dig1 = "";
+                String dig2 = "";
+                boolean nextDigit = false;
+                while (Character.isDigit(letter) || letter == 44) {
+                    if(letter == 44) {
+                        // if ,
+                        nextDigit = true;
+                    }
+                    if(Character.isDigit(letter)) {
+                        // if number
+                        if (nextDigit) {
+                            dig1 += letter;
+                        } else {
+                            dig2 += letter;
+                        }
                     }
                     count++;
-                    System.out.println(letter);
                     letter =  line.charAt(count);
                 }
+                if(letter == 41) {
+                    // if )
+                    System.out.println("valid: " + line);
+                    System.out.println(Integer.parseInt(dig1) + Integer.parseInt(dig2));
+                    total += Integer.parseInt(dig1) * Integer.parseInt(dig2);
+                    dig1 = "";
+                    dig2 = "";
+                } else {
+                    System.out.println("not valid" + line);
+                }
                 System.out.println("-end-");
+                nextDigit = false;
             }
-
         }
+        System.out.println(total);
     }
 
     public static ArrayList<String> getFileData(String fileName) {
