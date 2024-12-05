@@ -15,21 +15,7 @@ public class Day2Part1 {
         }
         int safeTotal = 0;
         for (String[] strings : grid) {
-            int lastNumber = Integer.parseInt(strings[0]);
-            boolean increasing = lastNumber < Integer.parseInt(strings[1]);
-            boolean safe = true;
-            for (int j = 1; j < strings.length; j++) {
-                int currentNumber = Integer.parseInt(strings[j]);
-                int diff = Math.abs(lastNumber - currentNumber);
-                if (increasing && lastNumber > currentNumber) { // consistent
-                    safe = false;
-                } else if (!increasing && lastNumber < currentNumber) {
-                    safe = false;
-                } else if (diff > 3 || diff < 1) {
-                    safe = false;
-                }
-                lastNumber = Integer.parseInt(strings[j]);
-            }
+            boolean safe = isSafe(strings);
             if (safe) {
                 safeTotal++;
             }
@@ -38,6 +24,24 @@ public class Day2Part1 {
 
     }
 
+    private static boolean isSafe(String[] strings) {
+        int lastNumber = Integer.parseInt(strings[0]);
+        boolean increasing = lastNumber < Integer.parseInt(strings[1]);
+        boolean safe = true;
+        for (int j = 1; j < strings.length; j++) {
+            int currentNumber = Integer.parseInt(strings[j]);
+            int diff = Math.abs(lastNumber - currentNumber);
+            if (increasing && lastNumber > currentNumber) { // consistent
+                safe = false;
+            } else if (!increasing && lastNumber < currentNumber) {
+                safe = false;
+            } else if (diff > 3 || diff < 1) {
+                safe = false;
+            }
+            lastNumber = Integer.parseInt(strings[j]);
+        }
+        return safe;
+    }
 
 
     public static ArrayList<String> getFileData(String fileName) {
