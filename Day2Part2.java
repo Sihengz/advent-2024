@@ -39,6 +39,10 @@ public class Day2Part2 {
                     if(!safe) {
                         System.out.println("new strings 2: " + Arrays.toString(removeIndex(strings, j - 1)));
                         safe = isSafe(removeIndex(strings, j-1), false);
+                        if(!safe) {
+                            System.out.println("new strings 2: " + Arrays.toString(removeIndex(strings, j - 1)));
+                            safe = isSafe(removeIndex(strings, j+1), false);
+                        }
                     }
                     tolerant = false;
                 } else {
@@ -53,6 +57,10 @@ public class Day2Part2 {
                     if(!safe) {
                         System.out.println("new strings 2: " + Arrays.toString(removeIndex(strings, j - 1)));
                         safe = isSafe(removeIndex(strings, j-1), false);
+                        if(!safe) {
+                            System.out.println("new strings 2: " + Arrays.toString(removeIndex(strings, j - 1)));
+                            safe = isSafe(removeIndex(strings, j+1), false);
+                        }
                     }
                     tolerant = false;
                 } else {
@@ -66,6 +74,10 @@ public class Day2Part2 {
                     if(!safe) {
                         System.out.println("new strings 2: " + Arrays.toString(removeIndex(strings, j - 1)));
                         safe = isSafe(removeIndex(strings, j-1), false);
+                        if(!safe) {
+                            System.out.println("new strings 2: " + Arrays.toString(removeIndex(strings, j - 1)));
+                            safe = isSafe(removeIndex(strings, j+1), false);
+                        }
                     }
                     tolerant = false;
                 } else {
