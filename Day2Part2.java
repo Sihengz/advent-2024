@@ -33,53 +33,22 @@ public class Day2Part2 {
             int diff = Math.abs(lastNumber - currentNumber);
             if (increasing && lastNumber > currentNumber) { // consistent
                 if (tolerant) {
-                    System.out.println("testing: " + Arrays.toString(strings));
-                    safe = isSafe(removeIndex(strings, j), false);
-                    System.out.println("new strings: " + Arrays.toString(removeIndex(strings, j)));
-                    if(!safe) {
-                        System.out.println("new strings 2: " + Arrays.toString(removeIndex(strings, j - 1)));
-                        safe = isSafe(removeIndex(strings, j-1), false);
-                        if(!safe) {
-                            System.out.println("new strings 2: " + Arrays.toString(removeIndex(strings, j - 1)));
-                            safe = isSafe(removeIndex(strings, j+1), false);
-                        }
-                    }
-                    tolerant = false;
+                    safe = CheckAll(strings);
+                    return safe;
                 } else {
                     safe = false;
                 }
-
             } else if (!increasing && lastNumber < currentNumber) {
                 if (tolerant) {
-                    System.out.println("testing: " + Arrays.toString(strings));
-                    safe = isSafe(removeIndex(strings, j), false);
-                    System.out.println("new strings: " + Arrays.toString(removeIndex(strings, j)));
-                    if(!safe) {
-                        System.out.println("new strings 2: " + Arrays.toString(removeIndex(strings, j - 1)));
-                        safe = isSafe(removeIndex(strings, j-1), false);
-                        if(!safe) {
-                            System.out.println("new strings 2: " + Arrays.toString(removeIndex(strings, j - 1)));
-                            safe = isSafe(removeIndex(strings, j+1), false);
-                        }
-                    }
-                    tolerant = false;
+                    safe = CheckAll(strings);
+                    return safe;
                 } else {
                     safe = false;
                 }
             } else if (diff > 3 || diff < 1) {
                 if (tolerant) {
-                    System.out.println("testing: " + Arrays.toString(strings));
-                    safe = isSafe(removeIndex(strings, j), false);
-                    System.out.println("new strings: " + Arrays.toString(removeIndex(strings, j)));
-                    if(!safe) {
-                        System.out.println("new strings 2: " + Arrays.toString(removeIndex(strings, j - 1)));
-                        safe = isSafe(removeIndex(strings, j-1), false);
-                        if(!safe) {
-                            System.out.println("new strings 2: " + Arrays.toString(removeIndex(strings, j - 1)));
-                            safe = isSafe(removeIndex(strings, j+1), false);
-                        }
-                    }
-                    tolerant = false;
+                    safe = CheckAll(strings);
+                    return safe;
                 } else {
                     safe = false;
                 }
@@ -88,7 +57,17 @@ public class Day2Part2 {
         }
         return safe;
     }
-
+    private static boolean CheckAll(String[] strings) {
+        boolean safe;
+        for (int i = 0; i < strings.length; i++) {
+            safe = isSafe(removeIndex(strings, i), false);
+            if (safe) {
+                System.out.println("safe: " + Arrays.toString(removeIndex(strings, i)));
+                return true;
+            }
+        }
+        return false;
+    }
     private static String[] removeIndex(String[] array, int index) {
         //fix me
         String[] newArray = new String[array.length - 1];
