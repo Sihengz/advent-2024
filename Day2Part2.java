@@ -69,7 +69,6 @@ public class Day2Part2 {
         return false;
     }
     private static String[] removeIndex(String[] array, int index) {
-        //fix me
         String[] newArray = new String[array.length - 1];
         for (int i = 0; i < array.length; i++) {
             if(i < index) {
