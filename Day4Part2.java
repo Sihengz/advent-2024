@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Day4Part1 {
+public class Day4Part2 {
     public static void main(String[] args) {
 
         ArrayList<String> fileData = getFileData("Day4Input.txt");
@@ -35,25 +35,13 @@ public class Day4Part1 {
                 if (checkDown(grid, r, c)) {
                     total++;
                 }
-                if (checkLeftDown(grid, r, c)) {;
-                    total++;
-                }
-                if (checkRightDown(grid, r, c)) {
-                    total++;
-                }
-                if (checkLeftUp(grid, r, c)) {
-                    total++;
-                }
-                if (checkRightUp(grid, r, c)) {
-                    total++;
-                }
             }
         }
         System.out.println(total);
     }
 
     public static boolean checkLeft(String[][] grid, int row, int col) {
-        return col - 3 >= 0 && grid[row][col].equals("X") && grid[row][col - 1].equals("M") && grid[row][col - 2].equals("A") && grid[row][col - 3].equals("S");
+        return col + 2 >= 0 && row + 2 >= 0 && grid[row][col].equals("M") && grid[row + 2][col].equals("M") && grid[row + 1][col + 1].equals("A") && grid[row][col + 2].equals("S") && grid[row + 2][col + 2].equals("S")
     }
     public static boolean checkRight(String[][] grid, int row, int col) {
         return col + 3 < grid.length && grid[row][col].equals("X") && grid[row][col + 1].equals("M") && grid[row][col + 2].equals("A") && grid[row][col + 3].equals("S");
@@ -63,18 +51,6 @@ public class Day4Part1 {
     }
     public static boolean checkDown(String[][] grid, int row, int col) {
         return row + 3 < grid.length && grid[row][col].equals("X") && grid[row + 1][col].equals("M") && grid[row + 2][col].equals("A") && grid[row + 3][col].equals("S");
-    }
-    public static boolean checkLeftUp(String[][] grid, int row, int col) {
-        return col - 3 >= 0 && row - 3 >= 0 && grid[row][col].equals("X") && grid[row - 1][col - 1].equals("M") && grid[row - 2][col - 2].equals("A") && grid[row - 3][col - 3].equals("S");
-    }
-    public static boolean checkRightDown(String[][] grid, int row, int col) {
-        return col + 3 < grid.length && row + 3 < grid.length && grid[row][col].equals("X") && grid[row + 1][col + 1].equals("M") && grid[row + 2][col + 2].equals("A") && grid[row + 3][col + 3].equals("S");
-    }
-    public static boolean checkRightUp(String[][] grid, int row, int col) {
-        return col + 3 < grid.length && row - 3 >= 0 && grid[row][col].equals("X") && grid[row - 1][col + 1].equals("M") && grid[row - 2][col + 2].equals("A") && grid[row - 3][col + 3].equals("S");
-    }
-    public static boolean checkLeftDown(String[][] grid, int row, int col) {
-        return col - 3 >= 0 && row + 3 < grid.length && grid[row][col].equals("X") && grid[row + 1][col - 1].equals("M") && grid[row + 2][col - 2].equals("A") && grid[row + 3][col - 3].equals("S");
     }
 
 
